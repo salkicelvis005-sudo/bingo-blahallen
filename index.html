@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071b40">
+<title>Bingo Blåhallen</title>
+
+<style>
+:root {
+  --bg:#07152e;
+  --panel:#10264b;
+  --blue:#1768e8;
+  --light:#dceaff;
+  --muted:#9db2d2;
+  --gold:#f5c65b;
+  --green:#35d49a;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:linear-gradient(145deg,#06132b,#102d5b);
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
+header {
+  padding:20px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #ffffff20;
+}
+.logo { display:flex;align-items:center;gap:12px; }
+.logo-icon {
+  width:45px;height:45px;border-radius:14px;
+  background:linear-gradient(135deg,#267aff,#0742a8);
+  display:grid;place-items:center;font-size:25px;
+}
+.logo h1 {font-size:21px;margin:0;}
+.logo small {color:var(--muted);}
+main {max-width:1050px;margin:35px auto;padding:0 18px;}
+.panel {
+  background:#10264beF;
+  border:1px solid #ffffff18;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 15px 45px #0005;
+}
+h2 {margin-top:0;}
+.muted {color:var(--muted);}
+.tabs {
+  display:flex;gap:10px;margin:22px 0;
+}
+button {
+  cursor:pointer;border:0;border-radius:11px;
+  padding:13px 18px;font-weight:bold;font-size:15px;
+}
+.tab {
+  background:#1b3762;color:#c7d9f5;flex:1;
+}
+.tab.active {background:var(--blue);color:white;}
+.primary {
+  background:linear-gradient(135deg,#3183ff,#0751c9);
+  color:white;width:100%;margin-top:15px;
+}
+.secondary {background:#24436f;color:white;}
+input {
+  width:100%;padding:15px;margin:9px 0 17px;
+  border-radius:10px;border:1px solid #45648e;
+  background:#071a38;color:white;font-size:17px;
+}
+label {font-size:14px;color:#c8d9f2;}
+.view {display:none;}
+.view.active {display:block;}
+.notice {
+  background:#3a301b;border:1px solid #80672d;
+  padding:13px;border-radius:12px;color:#ffe5a2;
+  font-size:13px;line-height:1.5;margin-top:18px;
+}
+.stats {
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;margin:20px 0;
+}
+.stat {
+  background:#19365f;padding:17px;border-radius:14px;
+}
+.stat small {color:var(--muted);}
+.stat strong {display:block;font-size:23px;margin-top:8px;}
+.balance {color:var(--gold);}
+.bingo-head {
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:5px;margin-top:18px;
+}
+.bingo-head div {
+  background:#1768e8;padding:12px 3px;
+  text-align:center;font-weight:bold;border-radius:7px;
+}
+.card-grid {
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:5px;margin-top:5px;
+}
+.cell {
+  background:#eaf2ff;color:#10264b;
+  min-height:55px;display:grid;place-items:center;
+  border-radius:7px;font-weight:bold;font-size:18px;
+  cursor:pointer;
+}
+.cell.marked {background:#35d49a;color:#062b22;}
+.draws {
+  display:flex;flex-wrap:wrap;gap:8px;margin:15px 0;
+}
+.ball {
+  width:39px;height:39px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#eaf2ff;color:#10264b;font-weight:bold;
+}
+.choice {
+  display:flex;gap:10px;align-items:center;
+  background:#19365f;padding:14px;border-radius:12px;
+  margin:10px 0;
+}
+.choice input {width:auto;margin:0;}
+footer {
+  text-align:center;color:var(--muted);
+  padding:30px 10px;font-size:13px;
+}
+@media(max-width:600px) {
+  header {padding:15px;}
+  .logo h1 {font-size:18px;}
+  main {margin:20px auto;}
+  .panel {padding:17px;}
+  .stats {grid-template-columns:1fr;}
+  .cell {min-height:43px;font-size:16px;}
+  .bingo-head div {padding:10px 2px;}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-icon">🎱</div>
+    <div>
+      <h1>Bingo Blåhallen</h1>
+      <small>Välkommen till vår bingohall</small>
+    </div>
+  </div>
+  <span>💙</span>
+</header>
+
+<main>
+  <section class="panel">
+    <div id="login">
+      <h2>Välkommen!</h2>
+      <p class="muted">Logga in för att komma till bingohallen.</p>
+
+      <div class="tabs">
+        <button class="tab active" onclick="showLogin('player',this)">Spelare</button>
+        <button class="tab" onclick="showLogin('owner',this)">Ägare</button>
+      </div>
+
+      <div id="playerLogin" class="view active">
+        <h2>Spelarinloggning</h2>
+        <label>Din fyrsiffriga PIN-kod</label>
+        <input id="playerPin" type="password"
+          inputmode="numeric" maxlength="4"
+          placeholder="••••" autocomplete="off">
+        <button class="primary" onclick="notConnected()">Logga in som spelare</button>
+      </div>
+
+      <div id="ownerLogin" class="view">
+        <h2>Ägarinloggning</h2>
+        <label>E-postadress</label>
+        <input type="email" placeholder="Din e-postadress">
+        <label>Lösenord</label>
+        <input type="password" placeholder="Ditt lösenord">
+        <button class="primary" onclick="notConnected()">Logga in som ägare</button>
+      </div>
+
+      <div class="notice">
+        Detta är den första designversionen. Inloggningen är ännu inte
+        ansluten till Supabase. Skapa inte riktiga spelarkonton här ännu.
+      </div>
+    </div>
+
+    <div id="playerPreview" class="view">
+      <h2>Spelarens bingohall</h2>
+      <p class="muted">Förhandsvisning av spelarens skärm</p>
+
+      <div class="stats">
+        <div class="stat">
+          <small>Mitt saldo</small>
+          <strong class="balance">0 kr</strong>
+        </div>
+        <div class="stat">
+          <small>Mina brickor</small>
+          <strong>0</strong>
+        </div>
+        <div class="stat">
+          <small>Aktiv rad</small>
+          <strong>1 av 5</strong>
+        </div>
+      </div>
+
+      <h3>Markering på brickan</h3>
+      <label class="choice">
+        <input type="radio" name="marking" checked>
+        Automatisk markering
+      </label>
+      <label class="choice">
+        <input type="radio" name="marking">
+        Jag markerar själv
+      </label>
+
+      <h3>Dragna nummer</h3>
+      <div class="draws">
+        <div class="ball">B-4</div>
+        <div class="ball">I-19</div>
+        <div class="ball">N-33</div>
+        <div class="ball">G-52</div>
+        <div class="ball">O-71</div>
+      </div>
+
+      <h3>Min bingobricka</h3>
+      <div class="bingo-head">
+        <div>B</div><div>I</div><div>N</div><div>G</div><div>O</div>
+      </div>
+      <div class="card-grid" id="card"></div>
+
+      <button class="primary" onclick="notConnected()">BINGO!</button>
+      <button class="secondary" onclick="backToLogin()">Tillbaka</button>
+
+      <div class="notice">
+        Exempelbrickan är endast en förhandsvisning.
+        Riktiga dragningar, saldo och bingo-kontroll kopplas in senare.
+      </div>
+    </div>
+
+    <div id="ownerPreview" class="view">
+      <h2>Ägarens kontrollpanel</h2>
+      <p class="muted">Förhandsvisning av administrationen</p>
+      <div class="stats">
+        <div class="stat"><small>Spelare</small><strong>0</strong></div>
+        <div class="stat"><small>Aktiva spel</small><strong>0</strong></div>
+        <div class="stat"><small>Bingo att granska</small><strong>0</strong></div>
+      </div>
+      <div class="stat">
+        <h3>Administration</h3>
+        <p>Skapa spelare med fyrsiffrig PIN-kod.</p>
+        <p>Hantera virtuella saldon och transaktioner.</p>
+        <p>Välj biljettpriser och 1–5 vinst­rader.</p>
+        <p>Granska bingo och godkänn eller neka.</p>
+      </div>
+      <button class="secondary" onclick="backToLogin()">Tillbaka</button>
+      <div class="notice">
+        Ägarpanelen är ännu inte ansluten till databasen.
+        Administrativa åtgärder aktiveras först efter säker serverkoppling.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Bingo Blåhallen · Virtuella saldon utan kontantvärde
+</footer>
+
+<script>
+function showLogin(type,button) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  button.classList.add('active');
+  document.getElementById('playerLogin').classList.toggle('active',type==='player');
+  document.getElementById('ownerLogin').classList.toggle('active',type==='owner');
+}
+
+function notConnected() {
+  alert('Inloggningen är inte aktiverad ännu. Vi kopplar först in den säkra servern.');
+}
+
+function backToLogin() {
+  document.querySelectorAll('main .view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('login').style.display='block';
+}
+
+const numbers=[
+  4,19,33,52,71,
+  7,22,38,48,65,
+  2,25,40,55,73,
+  12,17,31,59,68,
+  9,29,44,50,75
+];
+
+const card=document.getElementById('card');
+numbers.forEach(n=>{
+  const cell=document.createElement('div');
+  cell.className='cell';
+  cell.textContent=n;
+  cell.onclick=()=>cell.classList.toggle('marked');
+  card.appendChild(cell);
+});
+</script>
+</body>
+</html>
