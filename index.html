@@ -5,84 +5,111 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071b40">
 <title>Bingo Blåhallen</title>
+
 <style>
 :root {
-  --bg:#07152e;--panel:#10264b;--blue:#1768e8;
-  --light:#dceaff;--muted:#9db2d2;--gold:#f5c65b;
+  --bg:#07152e;
+  --panel:#10264b;
+  --blue:#1768e8;
+  --light:#dceaff;
+  --muted:#9db2d2;
+  --gold:#f5c65b;
   --green:#35d49a;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:linear-gradient(145deg,#06132b,#102d5b);
-  color:white;font-family:Arial,sans-serif;min-height:100vh
+* {box-sizing:border-box}
+body {
+  margin:0;
+  background:linear-gradient(145deg,#06132b,#102d5b);
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
 }
-header{
-  padding:20px 5%;display:flex;align-items:center;
-  justify-content:space-between;border-bottom:1px solid #ffffff20
+header {
+  padding:20px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #ffffff20;
 }
-.logo{display:flex;align-items:center;gap:12px}
-.logo-icon{
+.logo {display:flex;align-items:center;gap:12px}
+.logo-icon {
   width:45px;height:45px;border-radius:14px;
   background:linear-gradient(135deg,#267aff,#0742a8);
-  display:grid;place-items:center;font-size:25px
+  display:grid;place-items:center;font-size:25px;
 }
-.logo h1{font-size:21px;margin:0}
-.logo small{color:var(--muted)}
-main{max-width:1050px;margin:35px auto;padding:0 18px}
-.panel{
-  background:#10264bef;border:1px solid #ffffff18;
-  border-radius:20px;padding:25px;box-shadow:0 15px 45px #0005
+.logo h1 {font-size:21px;margin:0}
+.logo small {color:var(--muted)}
+main {max-width:1050px;margin:35px auto;padding:0 18px}
+.panel {
+  background:#10264bef;
+  border:1px solid #ffffff18;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 15px 45px #0005;
 }
-h2{margin-top:0}
-.muted{color:var(--muted)}
-.tabs{display:flex;gap:10px;margin:22px 0}
-button{
+h2 {margin-top:0}
+.muted {color:var(--muted)}
+.tabs {display:flex;gap:10px;margin:22px 0}
+button {
   cursor:pointer;border:0;border-radius:11px;
-  padding:13px 18px;font-weight:bold;font-size:15px
+  padding:13px 18px;font-weight:bold;font-size:15px;
 }
-button:disabled{opacity:.6;cursor:not-allowed}
-.tab{background:#1b3762;color:#c7d9f5;flex:1}
-.tab.active{background:var(--blue);color:white}
-.primary{
+button:disabled {opacity:.6;cursor:not-allowed}
+.tab {background:#1b3762;color:#c7d9f5;flex:1}
+.tab.active {background:var(--blue);color:white}
+.primary {
   background:linear-gradient(135deg,#3183ff,#0751c9);
-  color:white;width:100%;margin-top:15px
+  color:white;width:100%;margin-top:15px;
 }
-.secondary{background:#24436f;color:white;margin-top:12px}
-input{
+.secondary {
+  background:#24436f;color:white;margin-top:12px;
+}
+.link-button {
+  display:block;background:none;color:#8dbaff;
+  padding:12px 0;text-decoration:underline;
+  margin-top:8px;
+}
+input {
   width:100%;padding:15px;margin:9px 0 17px;
   border-radius:10px;border:1px solid #45648e;
-  background:#071a38;color:white;font-size:17px
+  background:#071a38;color:white;font-size:17px;
 }
-label{font-size:14px;color:#c8d9f2}
-.view{display:none}
-.view.active{display:block}
-.notice{
+label {font-size:14px;color:#c8d9f2}
+.view {display:none}
+.view.active {display:block}
+.notice {
   background:#3a301b;border:1px solid #80672d;
   padding:13px;border-radius:12px;color:#ffe5a2;
-  font-size:13px;line-height:1.5;margin-top:18px
+  font-size:13px;line-height:1.5;margin-top:18px;
 }
-.message{
+.message {
   display:none;padding:13px;border-radius:10px;
-  margin-top:15px;line-height:1.5;overflow-wrap:anywhere
+  margin-top:15px;line-height:1.5;overflow-wrap:anywhere;
 }
-.message.error{display:block;background:#51252b;color:#ffd7d7}
-.message.success{display:block;background:#174532;color:#d4ffe8}
-.stats{
+.message.error {display:block;background:#51252b;color:#ffd7d7}
+.message.success {display:block;background:#174532;color:#d4ffe8}
+.stats {
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:12px;margin:20px 0
+  gap:12px;margin:20px 0;
 }
-.stat{background:#19365f;padding:17px;border-radius:14px}
-.stat small{color:var(--muted)}
-.stat strong{display:block;font-size:23px;margin-top:8px}
-.balance{color:var(--gold)}
-footer{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}
-@media(max-width:600px){
-  header{padding:15px}.logo h1{font-size:18px}
-  main{margin:20px auto}.panel{padding:17px}
-  .stats{grid-template-columns:1fr}
+.stat {background:#19365f;padding:17px;border-radius:14px}
+.stat small {color:var(--muted)}
+.stat strong {display:block;font-size:23px;margin-top:8px}
+.balance {color:var(--gold)}
+footer {
+  text-align:center;color:var(--muted);
+  padding:30px 10px;font-size:13px;
+}
+@media(max-width:600px) {
+  header {padding:15px}
+  .logo h1 {font-size:18px}
+  main {margin:20px auto}
+  .panel {padding:17px}
+  .stats {grid-template-columns:1fr}
 }
 </style>
 </head>
+
 <body>
 <header>
   <div class="logo">
@@ -103,8 +130,8 @@ footer{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}
     <p class="muted">Logga in för att komma till bingohallen.</p>
 
     <div class="tabs">
-      <button class="tab active" id="playerTab">Spelare</button>
-      <button class="tab" id="ownerTab">Ägare</button>
+      <button class="tab active" id="playerTab" type="button">Spelare</button>
+      <button class="tab" id="ownerTab" type="button">Ägare</button>
     </div>
 
     <div id="playerLogin" class="view active">
@@ -123,6 +150,7 @@ footer{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}
 
     <div id="ownerLogin" class="view">
       <h2>Ägarinloggning</h2>
+
       <form id="ownerForm">
         <label for="ownerEmail">E-postadress</label>
         <input id="ownerEmail" type="email"
@@ -138,10 +166,67 @@ footer{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}
           Logga in som ägare
         </button>
       </form>
+
+      <button class="link-button" id="forgotButton" type="button">
+        Glömt lösenord?
+      </button>
+
       <div id="loginMessage" class="message"></div>
     </div>
   </div>
 
+  <!-- BEGÄR NYTT LÖSENORD -->
+  <div id="forgotView" class="view">
+    <h2>Glömt lösenord?</h2>
+    <p class="muted">
+      Skriv din e-postadress. Vi skickar en länk där du kan skapa ett nytt lösenord.
+    </p>
+
+    <form id="forgotForm">
+      <label for="forgotEmail">E-postadress</label>
+      <input id="forgotEmail" type="email"
+        placeholder="Din e-postadress" required>
+      <button class="primary" id="forgotSubmit" type="submit">
+        Skicka återställningsmejl
+      </button>
+    </form>
+
+    <div id="forgotMessage" class="message"></div>
+
+    <button class="secondary" id="backFromForgot" type="button">
+      Tillbaka till inloggning
+    </button>
+  </div>
+
+  <!-- SKAPA NYTT LÖSENORD -->
+  <div id="resetView" class="view">
+    <h2>Skapa nytt lösenord</h2>
+    <p class="muted">
+      Välj ett nytt lösenord till ditt ägarkonto.
+    </p>
+
+    <form id="resetForm">
+      <label for="newPassword">Nytt lösenord</label>
+      <input id="newPassword" type="password"
+        minlength="8" required
+        autocomplete="new-password"
+        placeholder="Minst 8 tecken">
+
+      <label for="confirmPassword">Bekräfta lösenord</label>
+      <input id="confirmPassword" type="password"
+        minlength="8" required
+        autocomplete="new-password"
+        placeholder="Skriv lösenordet igen">
+
+      <button class="primary" id="resetSubmit" type="submit">
+        Spara nytt lösenord
+      </button>
+    </form>
+
+    <div id="resetMessage" class="message"></div>
+  </div>
+
+  <!-- ÄGARENS PANEL -->
   <div id="ownerPreview" class="view">
     <h2>Välkommen till ägarpanelen!</h2>
     <p class="muted">Ägarinloggningen har verifierats.</p>
@@ -156,7 +241,7 @@ footer{text-align:center;color:var(--muted);padding:30px 10px;font-size:13px}
       Ägarinloggningen fungerar.
     </div>
 
-    <button class="secondary" id="logoutButton">
+    <button class="secondary" id="logoutButton" type="button">
       Logga ut
     </button>
 
@@ -183,6 +268,9 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_zSl8ZTvfe_sd_fuKLEyc_g_WPLTycgV";
 
+const SITE_URL =
+  "https://salkicelvis005-sudo.github.io/bingo-blahallen/";
+
 const supabase = createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
@@ -197,7 +285,22 @@ const ownerTab = document.getElementById("ownerTab");
 const loginMessage = document.getElementById("loginMessage");
 const ownerButton = document.getElementById("ownerButton");
 
+const forgotView = document.getElementById("forgotView");
+const resetView = document.getElementById("resetView");
+const forgotMessage = document.getElementById("forgotMessage");
+const resetMessage = document.getElementById("resetMessage");
+
+function hideAllViews() {
+  login.style.display = "none";
+  forgotView.classList.remove("active");
+  resetView.classList.remove("active");
+  ownerPreview.classList.remove("active");
+}
+
 function showLogin(type) {
+  hideAllViews();
+  login.style.display = "block";
+
   playerLogin.classList.toggle("active", type === "player");
   ownerLogin.classList.toggle("active", type === "owner");
   playerTab.classList.toggle("active", type === "player");
@@ -209,9 +312,144 @@ function showMessage(element, message, type) {
   element.className = "message " + type;
 }
 
+function showForgot() {
+  hideAllViews();
+  forgotView.classList.add("active");
+
+  const email = document.getElementById("ownerEmail").value.trim();
+  if (email) {
+    document.getElementById("forgotEmail").value = email;
+  }
+}
+
+function showReset() {
+  hideAllViews();
+  resetView.classList.add("active");
+}
+
 playerTab.addEventListener("click", () => showLogin("player"));
 ownerTab.addEventListener("click", () => showLogin("owner"));
 
+document.getElementById("forgotButton").addEventListener(
+  "click", showForgot
+);
+
+document.getElementById("backFromForgot").addEventListener(
+  "click", () => showLogin("owner")
+);
+
+// Skicka återställningsmejl
+document.getElementById("forgotForm").addEventListener(
+  "submit", async (event) => {
+    event.preventDefault();
+
+    const button = document.getElementById("forgotSubmit");
+    const email = document.getElementById("forgotEmail").value.trim();
+
+    button.disabled = true;
+    button.textContent = "Skickar...";
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(
+        email,
+        {
+          redirectTo: SITE_URL
+        }
+      );
+
+      if (error) throw error;
+
+      showMessage(
+        forgotMessage,
+        "Om adressen finns registrerad har ett återställningsmejl skickats. Kontrollera även skräpposten.",
+        "success"
+      );
+    } catch (error) {
+      showMessage(
+        forgotMessage,
+        error.message || "Kunde inte skicka återställningsmejlet.",
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = "Skicka återställningsmejl";
+    }
+  }
+);
+
+// Spara nytt lösenord efter återställningslänken
+document.getElementById("resetForm").addEventListener(
+  "submit", async (event) => {
+    event.preventDefault();
+
+    const password = document.getElementById("newPassword").value;
+    const confirmation =
+      document.getElementById("confirmPassword").value;
+    const button = document.getElementById("resetSubmit");
+
+    if (password.length < 8) {
+      showMessage(
+        resetMessage,
+        "Lösenordet måste innehålla minst 8 tecken.",
+        "error"
+      );
+      return;
+    }
+
+    if (password !== confirmation) {
+      showMessage(
+        resetMessage,
+        "Lösenorden är inte lika. Försök igen.",
+        "error"
+      );
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Sparar...";
+
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: password
+      });
+
+      if (error) throw error;
+
+      showMessage(
+        resetMessage,
+        "Ditt nya lösenord har sparats. Du kan nu logga in som ägare.",
+        "success"
+      );
+
+      document.getElementById("resetForm").reset();
+
+      await supabase.auth.signOut();
+
+      setTimeout(() => {
+        showLogin("owner");
+      }, 2000);
+
+    } catch (error) {
+      showMessage(
+        resetMessage,
+        error.message || "Kunde inte spara det nya lösenordet. Kontrollera att återställningslänken fortfarande gäller.",
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = "Spara nytt lösenord";
+    }
+  }
+);
+
+// Kontrollera återställningshändelsen från Supabase
+supabase.auth.onAuthStateChange((event) => {
+  if (event === "PASSWORD_RECOVERY") {
+    showReset();
+  }
+});
+
+// Ägarinloggning
 document.getElementById("ownerForm").addEventListener(
   "submit", async (event) => {
     event.preventDefault();
@@ -246,7 +484,7 @@ document.getElementById("ownerForm").addEventListener(
         );
       }
 
-      login.style.display = "none";
+      hideAllViews();
       ownerPreview.classList.add("active");
 
     } catch (error) {
@@ -262,11 +500,10 @@ document.getElementById("ownerForm").addEventListener(
   }
 );
 
+// Logga ut
 document.getElementById("logoutButton").addEventListener(
   "click", async () => {
     await supabase.auth.signOut();
-    ownerPreview.classList.remove("active");
-    login.style.display = "block";
     document.getElementById("ownerPassword").value = "";
     showLogin("player");
   }
